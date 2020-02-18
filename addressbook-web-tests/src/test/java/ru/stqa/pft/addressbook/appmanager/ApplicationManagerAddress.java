@@ -1,25 +1,23 @@
-package ru.stqa.pft.addressbook;
+package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
+import ru.stqa.pft.addressbook.model.AddressData;
 
 import java.util.concurrent.TimeUnit;
 
-public class TestBaseAddress {
-    protected WebDriver wd;
+public class ApplicationManagerAddress {
+    public WebDriver wd;
 
-    @BeforeMethod
-    public void setUp() {
+    public void init() {
         wd = new ChromeDriver();
         wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         wd.get("http://localhost/addressbook/");
         login("admin", "secret");
     }
 
-    private void login(String username, String password) {
+    public void login(String username, String password) {
         wd.findElement(By.name("user")).click();
         wd.findElement(By.name("user")).clear();
         wd.findElement(By.name("user")).sendKeys(username);
@@ -29,19 +27,19 @@ public class TestBaseAddress {
         wd.findElement(By.xpath("//input[@value='Login']")).click();
     }
 
-    private void logout() {
+    public void logout() {
         wd.findElement(By.linkText("Logout")).click();
     }
 
-    protected void returnToHomePage() {
+    public void returnToHomePage() {
         wd.findElement(By.linkText("home page")).click();
     }
 
-    protected void submitAddressCreation() {
+    public void submitAddressCreation() {
         wd.findElement(By.xpath("//body//input[21]")).click();
     }
 
-    protected void fillAddressForm(AddressData addressData) {
+    public void fillAddressForm(AddressData addressData) {
         wd.findElement(By.xpath("//input[@name='firstname']")).click();
         wd.findElement(By.xpath("//input[@name='firstname']")).clear();
         wd.findElement(By.xpath("//input[@name='firstname']")).sendKeys(addressData.getFirstname());
@@ -80,12 +78,11 @@ public class TestBaseAddress {
         wd.findElement(By.xpath("//input[@name='homepage']")).sendKeys(addressData.getHomepage());
     }
 
-    protected void initAddressCreation() {
+    public void initAddressCreation() {
         wd.findElement(By.linkText("add new")).click();
     }
 
-    @AfterMethod
-    public void tearDown() {
+    public void stop() {
         logout();
         wd.quit();
     }
