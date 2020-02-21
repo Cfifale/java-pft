@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.chrome.ChromeDriver;
 import ru.stqa.pft.addressbook.model.AddressData;
 
-public class AddressHelper extends HelperBaseAddress {
+public class AddressHelper extends HelperBase {
 
     public AddressHelper(ChromeDriver wd) {
         super(wd);

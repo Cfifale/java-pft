@@ -10,6 +10,7 @@ public class ApplicationManager {
     private SessionHelper sessionHelper;
     private NavigationHelper navigationHelper;
     private GroupHelper groupHelper;
+    private AddressHelper addressHelper;
 
     public void init() {
         wd = new ChromeDriver();
@@ -17,6 +18,7 @@ public class ApplicationManager {
         wd.get("http://localhost/addressbook/");
         groupHelper = new GroupHelper(wd);
         navigationHelper = new NavigationHelper(wd);
+        addressHelper = new AddressHelper(wd);
         sessionHelper = new SessionHelper(wd);
         sessionHelper.login("admin", "secret");
     }
@@ -27,6 +29,10 @@ public class ApplicationManager {
 
     public NavigationHelper getNavigationHelper() {
         return navigationHelper;
+    }
+
+    public AddressHelper getAddressHelper() {
+        return addressHelper;
     }
 
     public void stop() {

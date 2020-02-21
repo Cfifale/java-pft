@@ -3,7 +3,7 @@ package ru.stqa.pft.addressbook.tests;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.AddressData;
 
-public class AddressCreationTests extends TestBaseAddress {
+public class AddressCreationTests extends TestBase {
 
     @Test
     public void testsAddressCreation() {
