@@ -36,4 +36,21 @@ public class AddressHelper extends HelperBase {
     public void initAddressCreation() {
         click(By.linkText("add new"));
     }
+
+    public void selectAddress() {
+        click(By.name("selected[]"));
+    }
+
+    public void deleteSelectAddress() {
+        click(By.xpath("//*[@value='Delete']"));
+        wd.switchTo().alert().accept();
+    }
+
+    public void initAddressModification() {
+        click(By.xpath("//*[@alt='Edit']"));
+    }
+
+    public void submitAddressModification() {
+        click(By.xpath("//*[@value='Update']"));
+    }
 }
