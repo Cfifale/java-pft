@@ -1,8 +1,10 @@
 package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.AddressData;
 
 public class AddressHelper extends HelperBase {
@@ -19,7 +21,7 @@ public class AddressHelper extends HelperBase {
         click(By.xpath("//body//input[21]"));
     }
 
-    public void fillAddressForm(AddressData addressData) {
+    public void fillAddressForm(AddressData addressData, boolean creation) {
         type(By.xpath("//input[@name='firstname']"), addressData.getFirstname());
         type(By.xpath("//input[@name='middlename']"), addressData.getMiddlename());
         type(By.xpath("//input[@name='lastname']"), addressData.getLastname());
@@ -32,6 +34,12 @@ public class AddressHelper extends HelperBase {
         type(By.xpath("//input[@name='email2']"), addressData.getEmail2());
         type(By.xpath("//input[@name='email3']"), addressData.getEmail3());
         type(By.xpath("//input[@name='homepage']"), addressData.getHomepage());
+
+        if (creation) {
+            new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(addressData.getGroup());
+        } else {
+            Assert.assertFalse(isElementPresent(By.name("new_group")));
+        }
     }
 
     public void initAddressCreation() {
