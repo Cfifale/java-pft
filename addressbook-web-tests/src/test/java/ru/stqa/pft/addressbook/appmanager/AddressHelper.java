@@ -62,4 +62,15 @@ public class AddressHelper extends HelperBase {
     public void submitAddressModification() {
         click(By.xpath("//*[@value='Update']"));
     }
+
+    public void createAddress(AddressData address) {
+        initAddressCreation();
+        fillAddressForm(address, true);
+        submitAddressCreation();
+        returnToHomePage();
+    }
+
+    public boolean isThereAnAddress() {
+        return isElementPresent(By.xpath("//*[@alt='Edit']"));
+    }
 }
