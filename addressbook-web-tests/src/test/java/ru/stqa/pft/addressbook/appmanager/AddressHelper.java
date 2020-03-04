@@ -3,9 +3,14 @@ package ru.stqa.pft.addressbook.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.AddressData;
+import ru.stqa.pft.addressbook.model.GroupData;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class AddressHelper extends HelperBase {
 
@@ -46,8 +51,8 @@ public class AddressHelper extends HelperBase {
         click(By.linkText("add new"));
     }
 
-    public void selectAddress() {
-        click(By.name("selected[]"));
+    public void selectAddress(int index) {
+        wd.findElements(By.name("selected[]")).get(index).click();
     }
 
     public void deleteSelectAddress() {
@@ -55,8 +60,8 @@ public class AddressHelper extends HelperBase {
         wd.switchTo().alert().accept();
     }
 
-    public void initAddressModification() {
-        click(By.xpath("//*[@alt='Edit']"));
+    public void initAddressModification(int index) {
+        wd.findElements(By.xpath("//*[@alt='Edit']")).get(index).click();
     }
 
     public void submitAddressModification() {
@@ -72,5 +77,18 @@ public class AddressHelper extends HelperBase {
 
     public boolean isThereAnAddress() {
         return isElementPresent(By.xpath("//*[@alt='Edit']"));
+    }
+
+    public List<AddressData> getAddressList() {
+        List<AddressData> contacts = new ArrayList<AddressData>();
+        List<WebElement> elements = wd.findElements(By.cssSelector("tr[name=entry]"));
+        for (WebElement element : elements) {
+            String firstname = element.findElement(By.xpath("td[3]")).getText();;
+            String lastname = element.findElement(By.xpath("td[2]")).getText();
+            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("id"));
+            AddressData contact = new AddressData(id,firstname, null, lastname, null, null, null, null, null, null, null, null, null, null);
+            contacts.add(contact);
+        }
+        return contacts;
     }
 }
