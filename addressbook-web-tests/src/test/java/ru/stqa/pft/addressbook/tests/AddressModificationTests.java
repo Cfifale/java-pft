@@ -10,7 +10,7 @@ import java.util.List;
 
 public class AddressModificationTests extends TestBase{
 
-    @Test
+    @Test(enabled = false)
     public void testAddressModification() {
         if (! app.getAddressHelper().isThereAnAddress()) {
             app.getAddressHelper().createAddress(new AddressData("Иван", "Иванович", "Иванов", "ivanov", "г. Москва", "+7(495)111-11-11", "+7(915)111-11-11", "+7(495)100-10-10", "ivanov@sitehome.ru", "ivanov@sitehome.com", "ivanov@sitehome.me", "www.sitehome.ru", "test2"));
