@@ -13,7 +13,11 @@ public class AddressModificationTests extends TestBase{
     @BeforeMethod
     public void ensurePreconditions() {
         if (app.address().list().size() == 0) {
-            app.address().create(new AddressData("Иван", "Иванович", "Иванов", "ivanov", "г. Москва", "+7(495)111-11-11", "+7(915)111-11-11", "+7(495)100-10-10", "ivanov@sitehome.ru", "ivanov@sitehome.com", "ivanov@sitehome.me", "www.sitehome.ru", "test2"));
+            app.address().create(new AddressData()
+                    .withFirstname("Иван").withMiddlename("Иванович").withLastname("Иванов").withNickname("ivanov")
+                    .withAddress("г. Москва").withHome("+7(495)111-11-11").withMobile("+7(915)111-11-11").withWork("+7(495)100-10-10")
+                    .withEmail("ivanov@sitehome.ru").withEmail2("ivanov@sitehome.com").withEmail3("ivanov@sitehome.me")
+                    .withHomepage("www.sitehome.ru").withGroup("test2"));
         }
     }
 
@@ -21,7 +25,11 @@ public class AddressModificationTests extends TestBase{
     public void testAddressModification() {
         List<AddressData> before = app.address().list();
         int index = before.size() - 1;
-        AddressData contact = new AddressData(before.get(index).getId(),"Иван1", "Иванович1", "Иванов1", "ivanov1", "г. Москва1", "+7(111)111-11-11", "+7(111)111-11-11", "+7(111)100-10-10", "ivanov1@sitehome.ru", "ivanov1@sitehome.com", "ivanov1@sitehome.me", "www.sitehome1.ru", null);
+        AddressData contact = new AddressData().withId(before.get(index).getId())
+                .withFirstname("Иван1").withMiddlename("Иванович1").withLastname("Иванов1").withNickname("ivanov1")
+                .withAddress("г. Москва1").withHome("+7(111)111-11-11").withMobile("+7(111)111-11-11").withWork("+7(111)100-10-10")
+                .withEmail("ivanov1@sitehome.ru").withEmail2("ivanov1@sitehome.com").withEmail3("ivanov1@sitehome.me")
+                .withHomepage("www.sitehome1.ru");
         app.address().modify(index, contact);
         List<AddressData> after = app.address().list();
 

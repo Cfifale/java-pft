@@ -98,8 +98,7 @@ public class AddressHelper extends HelperBase {
             String firstname = element.findElement(By.xpath("td[3]")).getText();;
             String lastname = element.findElement(By.xpath("td[2]")).getText();
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("id"));
-            AddressData contact = new AddressData(id,firstname, null, lastname, null, null, null, null, null, null, null, null, null, null);
-            contacts.add(contact);
+            contacts.add(new AddressData().withId(id).withFirstname(firstname).withLastname(lastname));
         }
         return contacts;
     }

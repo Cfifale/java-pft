@@ -12,7 +12,11 @@ public class AddressDeletionTests extends TestBase {
     @BeforeMethod
     public void ensurePreconditions() {
         if (app.address().list().size() == 0) {
-            app.address().create(new AddressData("Иван", "Иванович", "Иванов", "ivanov", "г. Москва", "+7(495)111-11-11", "+7(915)111-11-11", "+7(495)100-10-10", "ivanov@sitehome.ru", "ivanov@sitehome.com", "ivanov@sitehome.me", "www.sitehome.ru", "test2"));
+            app.address().create(new AddressData()
+                    .withFirstname("Иван").withMiddlename("Иванович").withLastname("Иванов").withNickname("ivanov")
+                    .withAddress("г. Москва").withHome("+7(495)111-11-11").withMobile("+7(915)111-11-11").withWork("+7(495)100-10-10")
+                    .withEmail("ivanov@sitehome.ru").withEmail2("ivanov@sitehome.com").withEmail3("ivanov@sitehome.me")
+                    .withHomepage("www.sitehome.ru").withGroup("test2"));
         }
     }
 
