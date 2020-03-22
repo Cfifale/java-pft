@@ -68,18 +68,30 @@ public class AddressHelper extends HelperBase {
         click(By.xpath("//*[@value='Update']"));
     }
 
-    public void createAddress(AddressData address) {
+    public void create(AddressData address) {
         initAddressCreation();
         fillAddressForm(address, true);
         submitAddressCreation();
         returnToHomePage();
     }
 
+    public void modify(int index, AddressData contact) {
+        initAddressModification(index);
+        fillAddressForm(contact,false);
+        submitAddressModification();
+        returnToHomePage();
+    }
+
+    public void delete(int index) {
+        selectAddress(index);
+        deleteSelectAddress();
+    }
+
     public boolean isThereAnAddress() {
         return isElementPresent(By.xpath("//*[@alt='Edit']"));
     }
 
-    public List<AddressData> getAddressList() {
+    public List<AddressData> list() {
         List<AddressData> contacts = new ArrayList<AddressData>();
         List<WebElement> elements = wd.findElements(By.cssSelector("tr[name=entry]"));
         for (WebElement element : elements) {

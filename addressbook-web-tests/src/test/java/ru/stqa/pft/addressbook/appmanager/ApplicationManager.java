@@ -46,7 +46,7 @@ public class ApplicationManager {
         return navigationHelper;
     }
 
-    public AddressHelper getAddressHelper() {
+    public AddressHelper address() {
         return addressHelper;
     }
 
