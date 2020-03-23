@@ -5,13 +5,13 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.AddressData;
 
-import java.util.List;
+import java.util.Set;
 
 public class AddressDeletionTests extends TestBase {
 
     @BeforeMethod
     public void ensurePreconditions() {
-        if (app.address().list().size() == 0) {
+        if (app.address().all().size() == 0) {
             app.address().create(new AddressData()
                     .withFirstname("Иван").withMiddlename("Иванович").withLastname("Иванов").withNickname("ivanov")
                     .withAddress("г. Москва").withHome("+7(495)111-11-11").withMobile("+7(915)111-11-11").withWork("+7(495)100-10-10")
@@ -22,13 +22,13 @@ public class AddressDeletionTests extends TestBase {
 
     @Test
     public void testAddressDeletion() {
-        List<AddressData> before = app.address().list();
-        int index = before.size() - 1;
-        app.address().delete(index);
+        Set<AddressData> before = app.address().all();
+        AddressData deleteAddress = before.iterator().next();
+        app.address().delete(deleteAddress);
         app.goTo().gotoHomePage();
-        List<AddressData> after = app.address().list();
+        Set<AddressData> after = app.address().all();
 
-        before.remove(index);
+        before.remove(deleteAddress);
         Assert.assertEquals(before, after);
     }
 }

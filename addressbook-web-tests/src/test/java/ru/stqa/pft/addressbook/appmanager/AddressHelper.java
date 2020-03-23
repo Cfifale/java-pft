@@ -1,16 +1,15 @@
 package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.AddressData;
-import ru.stqa.pft.addressbook.model.GroupData;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class AddressHelper extends HelperBase {
 
@@ -51,8 +50,8 @@ public class AddressHelper extends HelperBase {
         click(By.linkText("add new"));
     }
 
-    public void selectAddress(int index) {
-        wd.findElements(By.name("selected[]")).get(index).click();
+    private void selectAddressById(int id) {
+        wd.findElement(By.cssSelector("input[value = '" + id + "']")).click();
     }
 
     public void deleteSelectAddress() {
@@ -60,8 +59,8 @@ public class AddressHelper extends HelperBase {
         wd.switchTo().alert().accept();
     }
 
-    public void initAddressModification(int index) {
-        wd.findElements(By.xpath("//*[@alt='Edit']")).get(index).click();
+    public void initAddressModification(int id) {
+        wd.findElement(By.cssSelector("a[href = 'edit.php?id="+id+"']")).click();
     }
 
     public void submitAddressModification() {
@@ -75,15 +74,15 @@ public class AddressHelper extends HelperBase {
         returnToHomePage();
     }
 
-    public void modify(int index, AddressData contact) {
-        initAddressModification(index);
+    public void modify(AddressData contact) {
+        initAddressModification(contact.getId());
         fillAddressForm(contact,false);
         submitAddressModification();
         returnToHomePage();
     }
 
-    public void delete(int index) {
-        selectAddress(index);
+    public void delete(AddressData address) {
+        selectAddressById(address.getId());
         deleteSelectAddress();
     }
 
@@ -91,8 +90,8 @@ public class AddressHelper extends HelperBase {
         return isElementPresent(By.xpath("//*[@alt='Edit']"));
     }
 
-    public List<AddressData> list() {
-        List<AddressData> contacts = new ArrayList<AddressData>();
+    public Set<AddressData> all() {
+        Set<AddressData> contacts = new HashSet<>();
         List<WebElement> elements = wd.findElements(By.cssSelector("tr[name=entry]"));
         for (WebElement element : elements) {
             String firstname = element.findElement(By.xpath("td[3]")).getText();;
