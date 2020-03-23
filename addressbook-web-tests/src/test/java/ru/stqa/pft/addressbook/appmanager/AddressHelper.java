@@ -58,7 +58,19 @@ public class AddressHelper extends HelperBase {
         wd.switchTo().alert().accept();
     }
 
-    public void initAddressModification(int id) {
+    public AddressData infoFromEditForm(AddressData contact) {
+        initAddressModificationById(contact.getId());
+        String firstname = wd.findElement(By.name("firstname")).getAttribute("value");
+        String lastname = wd.findElement(By.name("lastname")).getAttribute("value");
+        String home = wd.findElement(By.name("home")).getAttribute("value");
+        String mobile = wd.findElement(By.name("mobile")).getAttribute("value");
+        String work = wd.findElement(By.name("work")).getAttribute("value");
+        wd.navigate().back();
+        return new AddressData().withId(contact.getId()).withFirstname(firstname).withLastname(lastname)
+                .withHome(home).withMobile(mobile).withWork(work);
+    }
+
+    public void initAddressModificationById(int id) {
         wd.findElement(By.cssSelector("a[href = 'edit.php?id="+id+"']")).click();
     }
 
@@ -74,7 +86,7 @@ public class AddressHelper extends HelperBase {
     }
 
     public void modify(AddressData contact) {
-        initAddressModification(contact.getId());
+        initAddressModificationById(contact.getId());
         fillAddressForm(contact,false);
         submitAddressModification();
         returnToHomePage();
@@ -93,10 +105,12 @@ public class AddressHelper extends HelperBase {
         Contacts contacts = new Contacts();
         List<WebElement> elements = wd.findElements(By.cssSelector("tr[name=entry]"));
         for (WebElement element : elements) {
-            String firstname = element.findElement(By.xpath("td[3]")).getText();;
             String lastname = element.findElement(By.xpath("td[2]")).getText();
+            String firstname = element.findElement(By.xpath("td[3]")).getText();
+            String[] phones = element.findElement(By.xpath("td[6]")).getText().split("\n");
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("id"));
-            contacts.add(new AddressData().withId(id).withFirstname(firstname).withLastname(lastname));
+            contacts.add(new AddressData().withId(id).withFirstname(firstname).withLastname(lastname)
+                    .withHome(phones[0]).withMobile(phones[1]).withWork(phones[2]));
         }
         return contacts;
     }
