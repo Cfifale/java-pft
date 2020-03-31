@@ -37,6 +37,7 @@ public class AddressHelper extends HelperBase {
         type(By.xpath("//input[@name='email2']"), addressData.getEmail2());
         type(By.xpath("//input[@name='email3']"), addressData.getEmail3());
         type(By.xpath("//input[@name='homepage']"), addressData.getHomepage());
+        attach(By.xpath("//input[@name='photo']"), addressData.getPhoto());
 
         if (creation) {
             new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(addressData.getGroup());
