@@ -15,6 +15,26 @@ public class AddressData {
     private String email3;
     private String homepage;
     private String group;
+    private String allPhones;
+    private String allEmail;
+
+    public String getAllEmail() {
+        return allEmail;
+    }
+
+    public AddressData withAllEmail(String allEmail) {
+        this.allEmail = allEmail;
+        return this;
+    }
+
+    public String getAllPhones() {
+        return allPhones;
+    }
+
+    public AddressData withAllPhones(String allPhones) {
+        this.allPhones = allPhones;
+        return this;
+    }
 
     public AddressData withId(int id) {
         this.id = id;

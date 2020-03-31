@@ -62,12 +62,17 @@ public class AddressHelper extends HelperBase {
         initAddressModificationById(contact.getId());
         String firstname = wd.findElement(By.name("firstname")).getAttribute("value");
         String lastname = wd.findElement(By.name("lastname")).getAttribute("value");
+        String address = wd.findElement(By.name("address")).getAttribute("value");
         String home = wd.findElement(By.name("home")).getAttribute("value");
         String mobile = wd.findElement(By.name("mobile")).getAttribute("value");
         String work = wd.findElement(By.name("work")).getAttribute("value");
+        String email = wd.findElement(By.name("email")).getAttribute("value");
+        String email2 = wd.findElement(By.name("email2")).getAttribute("value");
+        String email3 = wd.findElement(By.name("email3")).getAttribute("value");
         wd.navigate().back();
         return new AddressData().withId(contact.getId()).withFirstname(firstname).withLastname(lastname)
-                .withHome(home).withMobile(mobile).withWork(work);
+                .withAddress(address).withHome(home).withMobile(mobile).withWork(work)
+                .withEmail(email).withEmail2(email2).withEmail3(email3);
     }
 
     public void initAddressModificationById(int id) {
@@ -105,12 +110,14 @@ public class AddressHelper extends HelperBase {
         Contacts contacts = new Contacts();
         List<WebElement> elements = wd.findElements(By.cssSelector("tr[name=entry]"));
         for (WebElement element : elements) {
+            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("id"));
             String lastname = element.findElement(By.xpath("td[2]")).getText();
             String firstname = element.findElement(By.xpath("td[3]")).getText();
-            String[] phones = element.findElement(By.xpath("td[6]")).getText().split("\n");
-            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("id"));
+            String address = element.findElement(By.xpath("td[4]")).getText();
+            String allEmail = element.findElement(By.xpath("td[5]")).getText();
+            String allPhones = element.findElement(By.xpath("td[6]")).getText();
             contacts.add(new AddressData().withId(id).withFirstname(firstname).withLastname(lastname)
-                    .withHome(phones[0]).withMobile(phones[1]).withWork(phones[2]));
+                    .withAddress(address).withAllEmail(allEmail).withAllPhones(allPhones));
         }
         return contacts;
     }
