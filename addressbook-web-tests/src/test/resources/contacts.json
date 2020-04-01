@@ -1,0 +1,56 @@
+[
+  {
+    "firstname": "Иван0",
+    "middlename": "Иванович0",
+    "lastname": "Иванов0",
+    "nickname": "ivanov0",
+    "address": "г. Москва0",
+    "home": "+7(495)111-11-10",
+    "mobile": "+7(915)111-11-10",
+    "work": "+7(495)100-10-10",
+    "email": "ivanov0@sitehome.ru",
+    "email2": "ivanov0@sitehome.com",
+    "email3": "ivanov0@sitehome.me",
+    "homepage": "www.sitehome0.ru",
+    "group": "test2",
+    "photo": {
+      "path": "src\\test\\resources\\stru.png"
+    }
+  },
+  {
+    "firstname": "Иван1",
+    "middlename": "Иванович1",
+    "lastname": "Иванов1",
+    "nickname": "ivanov1",
+    "address": "г. Москва1",
+    "home": "+7(495)111-11-11",
+    "mobile": "+7(915)111-11-11",
+    "work": "+7(495)100-10-11",
+    "email": "ivanov1@sitehome.ru",
+    "email2": "ivanov1@sitehome.com",
+    "email3": "ivanov1@sitehome.me",
+    "homepage": "www.sitehome1.ru",
+    "group": "test2",
+    "photo": {
+      "path": "src\\test\\resources\\stru.png"
+    }
+  },
+  {
+    "firstname": "Иван2",
+    "middlename": "Иванович2",
+    "lastname": "Иванов2",
+    "nickname": "ivanov2",
+    "address": "г. Москва2",
+    "home": "+7(495)111-11-12",
+    "mobile": "+7(915)111-11-12",
+    "work": "+7(495)100-10-12",
+    "email": "ivanov2@sitehome.ru",
+    "email2": "ivanov2@sitehome.com",
+    "email3": "ivanov2@sitehome.me",
+    "homepage": "www.sitehome2.ru",
+    "group": "test2",
+    "photo": {
+      "path": "src\\test\\resources\\stru.png"
+    }
+  }
+]

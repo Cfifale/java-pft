@@ -3,7 +3,7 @@ package ru.stqa.pft.addressbook.model;
 import java.io.File;
 
 public class AddressData {
-    private int id = 0;
+    private transient int id = 0;
     private String firstname;
     private String middlename;
     private String lastname;
