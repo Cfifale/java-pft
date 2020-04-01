@@ -23,6 +23,7 @@ public class AddressModificationTests extends TestBase{
 
     @Test
     public void testAddressModification() {
+        app.goTo().gotoHomePage();
         Contacts before = app.address().all();
         AddressData modifiedContact = before.iterator().next();
         AddressData contact = new AddressData().withId(modifiedContact.getId())

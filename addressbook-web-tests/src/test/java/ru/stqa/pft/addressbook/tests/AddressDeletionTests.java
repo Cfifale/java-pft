@@ -23,6 +23,7 @@ public class AddressDeletionTests extends TestBase {
 
     @Test
     public void testAddressDeletion() {
+        app.goTo().gotoHomePage();
         Contacts before = app.address().all();
         AddressData deleteContact = before.iterator().next();
         app.address().delete(deleteContact);

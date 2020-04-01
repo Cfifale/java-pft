@@ -37,6 +37,7 @@ public class AddressCreationTests extends TestBase {
 
     @Test(dataProvider = "validAddressFromJson")
     public void testsAddressCreation(AddressData contact) {
+        app.goTo().gotoHomePage();
         Contacts before = app.address().all();
         app.address().create(contact);
         Contacts after = app.address().all();

@@ -19,6 +19,7 @@ public class ApplicationManager {
 
     public ApplicationManager(String browser) {
         this.browser = browser;
+//        String target = System.getProperty("target", "local");
     }
 
     public void init() {
