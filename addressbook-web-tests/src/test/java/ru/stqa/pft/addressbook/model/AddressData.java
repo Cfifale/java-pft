@@ -1,32 +1,95 @@
 package ru.stqa.pft.addressbook.model;
 
+import com.google.gson.annotations.Expose;
+import org.hibernate.annotations.Type;
+
+import javax.persistence.*;
 import java.io.File;
 
+@Entity
+@Table(name = "addressbook")
 public class AddressData {
-    private transient int id = 0;
+    @Id
+    @Column(name = "id")
+    private int id = 0;
+
+    @Expose
+    @Column(name = "firstname")
     private String firstname;
+
+    @Expose
+    @Column(name = "middlename")
     private String middlename;
+
+    @Expose
+    @Column(name = "lastname")
     private String lastname;
+
+    @Expose
+    @Column(name = "nickname")
     private String nickname;
+
+    @Expose
+    @Column(name = "address")
+    @Type(type = "text")
     private String address;
+
+    @Expose
+    @Column(name = "home")
+    @Type(type = "text")
     private String home;
+
+    @Expose
+    @Column(name = "mobile")
+    @Type(type = "text")
     private String mobile;
+
+    @Expose
+    @Column(name = "work")
+    @Type(type = "text")
     private String work;
+
+    @Expose
+    @Column(name = "email")
+    @Type(type = "text")
     private String email;
+
+    @Expose
+    @Column(name = "email2")
+    @Type(type = "text")
     private String email2;
+
+    @Expose
+    @Column(name = "email3")
+    @Type(type = "text")
     private String email3;
+
+    @Expose
+    @Column(name = "homepage")
+    @Type(type = "text")
     private String homepage;
+
+    @Expose
+    @Transient
     private String group;
+
+    @Transient
     private String allPhones;
+
+    @Transient
     private String allEmail;
-    private File photo;
+
+    @Expose
+    @Column(name = "photo")
+    @Type(type = "text")
+    private String photo;
 
     public File getPhoto() {
-        return photo;
+        return new File(photo);
     }
 
     public AddressData withPhoto(File photo) {
-        this.photo = photo;
+        this.photo = photo.getPath();
         return this;
     }
 

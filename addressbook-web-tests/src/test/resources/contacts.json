@@ -13,9 +13,7 @@
     "email3": "ivanov0@sitehome.me",
     "homepage": "www.sitehome0.ru",
     "group": "test2",
-    "photo": {
-      "path": "src\\test\\resources\\stru.png"
-    }
+    "photo": "src\\test\\resources\\stru.png"
   },
   {
     "firstname": "Иван1",
@@ -31,9 +29,7 @@
     "email3": "ivanov1@sitehome.me",
     "homepage": "www.sitehome1.ru",
     "group": "test2",
-    "photo": {
-      "path": "src\\test\\resources\\stru.png"
-    }
+    "photo": "src\\test\\resources\\stru.png"
   },
   {
     "firstname": "Иван2",
@@ -49,8 +45,6 @@
     "email3": "ivanov2@sitehome.me",
     "homepage": "www.sitehome2.ru",
     "group": "test2",
-    "photo": {
-      "path": "src\\test\\resources\\stru.png"
-    }
+    "photo": "src\\test\\resources\\stru.png"
   }
 ]
