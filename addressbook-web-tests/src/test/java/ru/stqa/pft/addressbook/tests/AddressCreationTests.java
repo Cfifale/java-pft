@@ -38,9 +38,9 @@ public class AddressCreationTests extends TestBase {
     @Test(dataProvider = "validAddressFromJson")
     public void testsAddressCreation(AddressData contact) {
         app.goTo().gotoHomePage();
-        Contacts before = app.address().all();
+        Contacts before = app.db().contacts();
         app.address().create(contact);
-        Contacts after = app.address().all();
+        Contacts after = app.db().contacts();
 
         assertThat(after, equalTo(
                 before.withAdded(contact.withId(after.stream().mapToInt((a) -> a.getId()).max().getAsInt()))));
