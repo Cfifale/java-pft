@@ -40,7 +40,10 @@ public class AddressHelper extends HelperBase {
         attach(By.xpath("//input[@name='photo']"), addressData.getPhoto());
 
         if (creation) {
-            new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(addressData.getGroup());
+            if (addressData.getGroups().size() > 0) {
+                Assert.assertTrue(addressData.getGroups().size() == 1);
+                new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(addressData.getGroups().iterator().next().getName());
+            }
         } else {
             Assert.assertFalse(isElementPresent(By.name("new_group")));
         }

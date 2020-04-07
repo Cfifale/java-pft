@@ -22,7 +22,7 @@ public class AddressCreationTests extends TestBase {
 
     @DataProvider
     public Iterator<Object[]> validAddressFromJson() throws IOException {
-        try (BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/contacts.json")))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/contacts2.json")))) {
             String json = "";
             String line = reader.readLine();
             while (line != null) {

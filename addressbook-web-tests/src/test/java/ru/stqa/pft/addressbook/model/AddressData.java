@@ -1,10 +1,13 @@
 package ru.stqa.pft.addressbook.model;
 
 import com.google.gson.annotations.Expose;
+import org.hibernate.annotations.ManyToAny;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.io.File;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "addressbook")
@@ -69,9 +72,9 @@ public class AddressData {
     @Type(type = "text")
     private String homepage;
 
-    @Expose
-    @Transient
-    private String group;
+//    @Expose
+//    @Transient
+//    private String group;
 
     @Transient
     private String allPhones;
@@ -83,6 +86,12 @@ public class AddressData {
     @Column(name = "photo")
     @Type(type = "text")
     private String photo;
+
+    @Expose
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "address_in_groups",
+            joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "group_id"))
+    private Set<GroupData> groups = new HashSet<GroupData>();
 
     public File getPhoto() {
         return new File(photo);
@@ -176,8 +185,13 @@ public class AddressData {
         return this;
     }
 
-    public AddressData withGroup(String group) {
-        this.group = group;
+//    public AddressData withGroup(String group) {
+//        this.group = group;
+//        return this;
+//    }
+
+    public AddressData inGroup(GroupData group) {
+        groups.add(group);
         return this;
     }
 
@@ -233,8 +247,12 @@ public class AddressData {
         return homepage;
     }
 
-    public String getGroup() {
-        return group;
+//    public String getGroup() {
+//        return group;
+//    }
+
+    public Groups getGroups() {
+        return new Groups(groups);
     }
 
     @Override

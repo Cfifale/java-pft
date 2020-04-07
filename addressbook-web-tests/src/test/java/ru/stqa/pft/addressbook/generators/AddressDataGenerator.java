@@ -5,7 +5,10 @@ import com.beust.jcommander.Parameter;
 import com.beust.jcommander.ParameterException;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import ru.stqa.pft.addressbook.appmanager.DbHelper;
 import ru.stqa.pft.addressbook.model.AddressData;
+import ru.stqa.pft.addressbook.model.GroupData;
+import ru.stqa.pft.addressbook.model.Groups;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -13,6 +16,7 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class AddressDataGenerator {
     @Parameter(names = "-c", description = "Contact count")
@@ -54,6 +58,8 @@ public class AddressDataGenerator {
     }
 
     private List<AddressData> generateContacts(int count) {
+        File photo = new File("src/test/resources/stru.png");
+        Groups groups = new DbHelper().groups();
         List<AddressData> contacts = new ArrayList<>();
         for (int i = 0; i < count; i++) {
             contacts.add(new AddressData()
@@ -63,7 +69,8 @@ public class AddressDataGenerator {
                     .withMobile(String.format("+7(915)111-11-1%s", i)).withWork(String.format("+7(495)100-10-1%s", i))
                     .withEmail(String.format("ivanov%s@sitehome.ru", i)).withEmail2(String.format("ivanov%s@sitehome.com", i))
                     .withEmail3(String.format("ivanov%s@sitehome.me", i)).withHomepage(String.format("www.sitehome%s.ru", i))
-                    .withGroup("test2").withPhoto(new File("src/test/resources/stru.png")));
+                    .inGroup(groups.stream().map((g) -> new GroupData().withName(g.getName()))
+                            .collect(Collectors.toSet()).iterator().next()).withPhoto(photo));
         }
         return contacts;
     }
