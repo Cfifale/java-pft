@@ -69,4 +69,13 @@ public class TestBase {
                     .collect(Collectors.toSet())));
         }
     }
+
+    public AddressData getContact(AddressData contact, Contacts contacts) {
+        for (AddressData getContact : contacts) {
+            if (getContact.getId() == contact.getId()) {
+                return getContact;
+            }
+        }
+        return null;
+    }
 }

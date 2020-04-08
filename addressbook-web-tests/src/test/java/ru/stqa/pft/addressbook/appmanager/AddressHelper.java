@@ -7,6 +7,8 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.AddressData;
 import ru.stqa.pft.addressbook.model.Contacts;
+import ru.stqa.pft.addressbook.model.GroupData;
+import ru.stqa.pft.addressbook.model.Groups;
 
 import java.util.List;
 
@@ -85,6 +87,18 @@ public class AddressHelper extends HelperBase {
 
     public void submitAddressModification() {
         click(By.xpath("//*[@value='Update']"));
+    }
+
+    public void addToGroup(AddressData contact, GroupData group) {
+        selectAddressById(contact.getId());
+        new Select(wd.findElement(By.name("to_group"))).selectByValue(String.valueOf(group.getId()));
+        click(By.name("add"));
+    }
+
+    public void deleteFromGroup(AddressData contact, GroupData group) {
+        new Select(wd.findElement(By.name("group"))).selectByValue(String.valueOf(group.getId()));
+        selectAddressById(contact.getId());
+        click(By.name("remove"));
     }
 
     public void create(AddressData address) {
