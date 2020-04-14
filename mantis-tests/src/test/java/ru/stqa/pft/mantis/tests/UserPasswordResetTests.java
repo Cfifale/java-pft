@@ -22,7 +22,7 @@ public class UserPasswordResetTests extends TestBase {
     }
 
     @Test
-    public void testRegistration() throws IOException, MessagingException {
+    public void testUserPasswordReset() throws IOException, MessagingException {
         Users users = app.db().users();
         users.remove(new UserData().withUsername("administrator").withEmail("root@localhost"));
         UserData user = users.iterator().next();
