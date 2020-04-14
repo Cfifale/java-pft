@@ -21,6 +21,8 @@ public class ApplicationManager {
     private FtpHelper ftp;
     private MailHelper mailHelper;
     private JamesHelper jamesHelper;
+    private PasswordResetHelper passwordResetHelper;
+    private DbHelper dbHelper;
 
     public ApplicationManager(String browser) {
         this.browser = browser;
@@ -30,6 +32,8 @@ public class ApplicationManager {
     public void init() throws IOException {
         String target = System.getProperty("target", "local");
         properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
+
+        dbHelper = new DbHelper();
     }
 
     public void stop() {
@@ -53,6 +57,13 @@ public class ApplicationManager {
         return registrationHelper;
     }
 
+    public PasswordResetHelper passwordReset() {
+        if (passwordResetHelper == null) {
+            passwordResetHelper = new PasswordResetHelper(this);
+        }
+        return passwordResetHelper;
+    }
+
     public FtpHelper ftp() {
         if (ftp == null) {
             ftp = new FtpHelper(this);
@@ -70,6 +81,7 @@ public class ApplicationManager {
                 wd = new InternetExplorerDriver();
             }
             wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+            wd.manage().window().maximize();
             wd.get(properties.getProperty("web.baseUrl"));
         }
         return wd;
@@ -87,5 +99,9 @@ public class ApplicationManager {
             jamesHelper = new JamesHelper(this);
         }
         return jamesHelper;
+    }
+
+    public DbHelper db() {
+        return dbHelper;
     }
 }
